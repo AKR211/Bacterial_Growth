@@ -21,13 +21,13 @@ def division(params, c):
 
 
 # Simulate the cell division process using Lineage Growth for N iterations and return the results and types of cells
-def simulate(params, N):
+def simulate(params, N, tqdm_flag=True):
     c_old = Cell(10, 10, 10, 10)
 
     out = []
     types = []
 
-    for i in tqdm(range(N), desc="Simulation", total=N):
+    for i in tqdm(range(N), desc="Simulation", total=N, disable=not tqdm_flag):
         out_div, type, c_new = division(params, c_old)
         if i>1000:
             out.append(out_div)

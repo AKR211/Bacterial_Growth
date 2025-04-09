@@ -4,7 +4,7 @@ from tqdm import tqdm
 from Utils import simulate
 
 # This script simulates the growth of cells under different values of phi and calculates the doubling times for different cell types.
-def main():
+def main(N):
 
     params = {
     "zeta": 1e-3,
@@ -18,7 +18,6 @@ def main():
     }
 
     phis = [0.1, 0.3, 0.6]
-    N = int(1e6) # Number of cells to simulate
 
     doubling_times_list = []
     cell_types_list = []
@@ -45,11 +44,19 @@ def main():
 if __name__ == "__main__":
     import netCDF4 as nc
     import os
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Simulate Interdivision growth model")
+    parser.add_argument("--n", type=float, default=1e6, help="Number of cells to simulate")
+    args = parser.parse_args()
+    N = args.n
+    if N <= 0:
+        raise ValueError("N must be a positive integer.")
 
     if not os.path.exists("./data/"):
         os.makedirs("./data/")
 
-    phis, doubling_times_list, cell_types_list = main()
+    phis, doubling_times_list, cell_types_list = main(int(N))
 
     ncfile = nc.Dataset("./data/Interdivision.nc", "w", format="NETCDF4")
     ncfile.createDimension("phi", len(phis))

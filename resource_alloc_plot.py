@@ -87,7 +87,8 @@ def plot2(phis, omegas, cell_types):
 
     plt.tight_layout()
     plt.subplots_adjust(wspace=0.4, hspace=0.4)
-    plt.show()
+    plt.savefig("./figures/resource_alloc_cell_types.png", dpi=300)
+    plt.close()
 
         
 

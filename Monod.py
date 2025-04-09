@@ -4,7 +4,7 @@ from tqdm import tqdm
 from Utils import simulate
 
 # This script simulates the growth of cells with different initial cell densities (n0s) and calculates the growth rate (GR), ribosome content (r), and cell size (s) for each density.
-def main():
+def main(N):
 
     params = {
     "zeta": 1e-3,
@@ -26,7 +26,7 @@ def main():
         params["n_0"] = n0
 
         # Simulate growth of 2000 cells with the given parameters
-        cells, cell_types = simulate(params, 2000) # 'cells' has shape (n_cells, n_steps, n_variables) and 'cell_types' has shape (n_cells,)
+        cells, cell_types = simulate(params, N) # 'cells' has shape (n_cells, n_steps, n_variables) and 'cell_types' has shape (n_cells,)
         vals = []
         for cell in cells:
             c = np.array(cell).T # growth data of the cell
@@ -45,8 +45,16 @@ def main():
 if __name__ == "__main__":
     import netCDF4 as nc
     import os
+    import argparse
 
-    n0s, GRs, ribs, cell_sizes = main()
+    parser = argparse.ArgumentParser(description="Simulate Monod growth model")
+    parser.add_argument("--n", type=float, default=2000, help="Number of cells to simulate")
+    args = parser.parse_args()
+    N = args.n
+    if N <= 0:
+        raise ValueError("N must be a positive integer.")
+
+    n0s, GRs, ribs, cell_sizes = main(int(N))
 
     if not os.path.exists("./data/"):
         os.makedirs("./data/")
