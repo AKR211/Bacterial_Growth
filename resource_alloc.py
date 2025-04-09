@@ -65,7 +65,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Simulate cell growth and save results to a NetCDF file.")
-    parser.add_argument("--n", type=int, default=1e4, help="Number of cells to simulate.")
+    parser.add_argument("--n", type=float, default=1e4, help="Number of cells to simulate.")
     parser.add_argument("--rpt", type=int, default=10, help="Number of repetitions for the simulation.")
 
     args = parser.parse_args()
