@@ -18,7 +18,11 @@ The implementation is entirely in done in Python and is designed to reproduce re
 - **`Monod_plot.py`**: Generate plots for mean behaviour analysis
 - **`Interdivision.py`**: Generate data for Distribution of Division times analysis
 - **`Interdivision_plot.py`**: Generate plots for Distribution of Division times analysis
+- **`Resource_alloc.py`**: Generate data for Resource allocation analysis with varying phi and omega
+- **`Resource_alloc_plot.py`**: Generate plots for Resource allocation analysis with varying phi and omega
 - **`README.md`**: This file.
+
+Note: Data and figures are provided in the `data` and `figures` folders, respectively (large files are excluded from this).
 
 ## Requirements
 
